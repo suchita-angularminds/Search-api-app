@@ -16,13 +16,19 @@ export class SearchService {
   public searchInput(term):Observable<any>{
     if(term===""){
       console.log("Not defined")
-      // return of([])
+      return of([])
     }else{
       let params={access_key:environment.accessKey,query:term}
        return this.http.get(this.baseUrl,{params}).pipe(
          map(response=>{
            console.log(response)
-           return this.searchResults=response["organic_results"]
+          if(response["error"]){
+            return this.searchResults=response
+          }else{
+            return this.searchResults=response["organic_results"]
+          }
+
+
          })
        )
     }

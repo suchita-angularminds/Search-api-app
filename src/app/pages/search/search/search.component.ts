@@ -17,7 +17,8 @@ export class SearchComponent implements OnInit {
   public paginationElements:any;
   public errorMessage:any;
   searchForm:FormGroup;
-  p:number=1
+
+
   constructor(private fb:FormBuilder,private searchService:SearchService) { }
 
 
@@ -25,6 +26,7 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.buildForm();
     this.search();
+
   }
 
   buildForm(){
@@ -47,18 +49,27 @@ export class SearchComponent implements OnInit {
         this.loading= true;
         return this.searchService._searchInput(term)
       }),
-      // catchError((e1)=>{
-      //   console.log(el)
-
+      // catchError((e)=>{
+      //   console.log("error",e)
+      //   this.loading=false;
+      //   this.errorMessage=e.message;
+      //   return throwError(e)
       // })
     ).subscribe(v=>{
       console.log('v', v)
       this.loading=false;
-      this.searchResults=v;
-      console.log('this.searchResults', this.searchResults)
+      if(v.error){
+        console.log("error",v.error)
+        this.errorMessage=v.error;
+      }else{
+        this.searchResults=v;
+        this.errorMessage=undefined;
+        console.log('this.searchResults', this.searchResults)
+      }
 
     })
   }
+
 
 
 
