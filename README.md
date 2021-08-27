@@ -18,7 +18,7 @@ npm install || npm i
 ```
 ```
 
-2. For starting development client run below command at the root directory
+2. For starting development client run below command at the root directory (http://localhost:4200/)
 
 ```
 ng serve --open
