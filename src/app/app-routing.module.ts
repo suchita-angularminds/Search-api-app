@@ -11,7 +11,8 @@ const routes: Routes = [
   },
   {
     path: 'search',
-    loadChildren: () => import('src/app/pages/search/search.module').then(m => m.SearchModule)
+    loadChildren: 'src/app/pages/search/search.module#SearchModule',
+    //loadChildren: () => import('src/app/pages/search/search.module').then(m => m.SearchModule)
   },
   {
     path: '**',
